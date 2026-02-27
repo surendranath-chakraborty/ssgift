@@ -1,9 +1,9 @@
 /**
  * SS GIFT — Authentication Module
- * Admin credentials are secret — no visible hint shown on login page.
  */
 const Auth = (() => {
 
+  /* ── Tab Switch ── */
   const switchTab = (tab) => {
     document.querySelectorAll('.auth-tab').forEach(t =>
       t.classList.toggle('active', t.dataset.tab === tab));
@@ -11,12 +11,63 @@ const Auth = (() => {
     document.getElementById('registerForm')?.classList.toggle('active', tab === 'register');
   };
 
+  /* ── Show / Hide Password ── */
+  const togglePassword = (inputId, btn) => {
+    const input = document.getElementById(inputId);
+    if (!input) return;
+    const show = input.type === 'password';
+    input.type = show ? 'text' : 'password';
+    const icon = btn.querySelector('i');
+    if (icon) icon.className = show ? 'fas fa-eye-slash' : 'fas fa-eye';
+  };
+
+  /* ── Forgot Password ── */
+  const forgotPassword = () => {
+    // Pre-fill with whatever is already typed in the email box
+    const prefill = document.getElementById('loginEmail')?.value?.trim() || '';
+
+    Modal.open('Reset Password', `
+      <div style="display:flex;flex-direction:column;gap:var(--s4)">
+        <p style="font-size:var(--text-sm);color:var(--color-muted);line-height:1.7">
+          Enter your email and we'll send a password reset link instantly.
+        </p>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input class="form-input" type="email" id="resetEmail"
+            placeholder="you@email.com" value="${prefill}"
+            onkeydown="if(event.key==='Enter') Auth._doReset()"/>
+        </div>
+        <button class="btn btn--primary btn--full btn--md" onclick="Auth._doReset()">
+          <i class="fas fa-paper-plane"></i> Send Reset Link
+        </button>
+        <p style="font-size:var(--text-xs);color:var(--color-muted);text-align:center">
+          Check spam/junk if you don't see it within a minute.
+        </p>
+      </div>`);
+
+    setTimeout(() => {
+      const el = document.getElementById('resetEmail');
+      if (el) { el.focus(); el.select(); }
+    }, 120);
+  };
+
+  const _doReset = () => {
+    const email = document.getElementById('resetEmail')?.value?.trim().toLowerCase();
+    if (!email || !email.includes('@')) {
+      Toast.show('Enter a valid email address', 'error');
+      return;
+    }
+    FirebaseAuth.sendPasswordReset(email);
+    Modal.close();
+  };
+
+  /* ── Login ── */
   const login = () => {
     const email = document.getElementById('loginEmail')?.value?.trim().toLowerCase();
     const pass  = document.getElementById('loginPass')?.value;
     if (!email || !pass) { Toast.show('Please fill in all fields', 'error'); return; }
 
-    // Admin — silent check, no UI hint
+    // Admin — silent check
     if (email === CONFIG.ADMIN_EMAIL && pass === CONFIG.ADMIN_PASS) {
       Store.setCurrentUser({ id:'admin', name:'Admin', email:CONFIG.ADMIN_EMAIL, isAdmin:true, photo:'' });
       UI.renderAuthArea();
@@ -29,12 +80,13 @@ const Auth = (() => {
     const user  = users.find(u => u.email === email && u.password === pass);
     if (!user)        { Toast.show('Invalid email or password', 'error'); return; }
     if (user.blocked) { Toast.show('Account suspended. Contact support.', 'error'); return; }
-    Store.setCurrentUser({ ...user, isAdmin: false });
+    Store.setCurrentUser({ ...user, isAdmin:false });
     UI.renderAuthArea();
     Toast.show(`Welcome back, ${user.name.split(' ')[0]}! 🎉`, 'success');
     Router.go('account');
   };
 
+  /* ── Register ── */
   const register = () => {
     const name  = document.getElementById('regName')?.value?.trim();
     const email = document.getElementById('regEmail')?.value?.trim().toLowerCase();
@@ -58,8 +110,10 @@ const Auth = (() => {
     Router.go('account');
   };
 
-  const loginWithGoogle = () => { FirebaseAuth.signInWithGoogle(); };
+  /* ── Google ── */
+  const loginWithGoogle = () => FirebaseAuth.signInWithGoogle();
 
+  /* ── Logout ── */
   const logout = () => {
     FirebaseAuth.signOut();
     Store.clearSession();
@@ -68,5 +122,5 @@ const Auth = (() => {
     Router.go('home');
   };
 
-  return { switchTab, login, register, loginWithGoogle, logout };
+  return { switchTab, togglePassword, forgotPassword, _doReset, login, register, loginWithGoogle, logout };
 })();

@@ -15,15 +15,14 @@
   <link rel="stylesheet" href="css/shop.css"/>
   <link rel="stylesheet" href="css/auth.css"/>
   <link rel="stylesheet" href="css/account.css"/>
+  <link rel="stylesheet" href="css/admin.css"/>
   <link rel="stylesheet" href="css/responsive.css"/>
-  <!-- Firebase (loads silently — Google Sign-In activates after config) -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 </head>
 <body>
 
-<!-- ═══ NAVBAR ═══ -->
 <nav id="mainNav">
   <a href="#" class="logo" onclick="Router.go('home')">SS <span>GIFT</span></a>
   <ul class="nav-links">
@@ -59,7 +58,6 @@
   </div>
 </nav>
 
-<!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
   <a onclick="Router.go('home');UI.toggleMobile()"><i class="fas fa-home"></i> Home</a>
   <a onclick="Router.go('shop');UI.toggleMobile()"><i class="fas fa-store"></i> Shop</a>
@@ -71,10 +69,8 @@
   </a>
 </div>
 
-<!-- Toast -->
 <div class="toast-container" id="toastContainer"></div>
 
-<!-- Modal -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal" id="modalBox">
     <div class="modal-header">
@@ -85,10 +81,8 @@
   </div>
 </div>
 
-<!-- App Root -->
 <main id="appRoot"></main>
 
-<!-- Scripts — ORDER MATTERS -->
 <script src="js/config.js"></script>
 <script src="js/data.js"></script>
 <script src="js/store.js"></script>

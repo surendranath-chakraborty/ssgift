@@ -35,3 +35,23 @@
 .auth-switch{text-align:center;font-size:var(--text-sm);color:var(--color-muted);}
 .auth-switch button{background:none;border:none;color:var(--color-rose);font-weight:600;cursor:pointer;font-size:inherit;font-family:inherit;padding:0;}
 .auth-switch button:hover{text-decoration:underline;}
+
+/* ── Password field with toggle ── */
+.password-wrap{position:relative;display:flex;align-items:center;}
+.password-wrap .form-input{padding-right:2.8rem;width:100%;}
+.password-toggle{position:absolute;right:.75rem;background:none;border:none;color:var(--color-muted);font-size:.9rem;cursor:pointer;padding:.25rem;border-radius:var(--r-sm);transition:var(--trans-fast);line-height:1;}
+.password-toggle:hover{color:var(--color-rose);}
+
+/* ── Forgot password link ── */
+.forgot-link{background:none;border:none;color:var(--color-rose);font-size:var(--text-xs);font-weight:600;cursor:pointer;padding:0;font-family:var(--font-body);transition:var(--trans-fast);}
+.forgot-link:hover{text-decoration:underline;color:var(--color-rose-h);}
+
+/* ── Password toggle ── */
+.password-wrap{position:relative;display:flex;align-items:center;}
+.password-wrap .form-input{padding-right:2.8rem;width:100%;}
+.password-toggle{position:absolute;right:.75rem;background:none;border:none;color:var(--color-muted);font-size:.9rem;cursor:pointer;padding:.25rem;line-height:1;transition:color .15s;}
+.password-toggle:hover{color:var(--color-rose);}
+
+/* ── Forgot password link ── */
+.forgot-link{background:none;border:none;color:var(--color-rose);font-size:var(--text-xs);font-weight:600;cursor:pointer;padding:0;font-family:var(--font-body);}
+.forgot-link:hover{text-decoration:underline;}
