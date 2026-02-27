@@ -1,115 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="SS GIFT — Where Love Finds Its Form. Premium handcrafted gifts for every occasion." />
-  <meta name="theme-color" content="#b5606a" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="description" content="SS GIFT — Where Love Finds Its Form. Premium gifts for every occasion."/>
   <title>SS GIFT — Where Love Finds Its Form</title>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-  <!-- Core Stylesheets -->
-  <link rel="stylesheet" href="css/variables.css" />
-  <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/navbar.css" />
-  <link rel="stylesheet" href="css/components.css" />
-  <link rel="stylesheet" href="css/home.css" />
-  <link rel="stylesheet" href="css/shop.css" />
-  <link rel="stylesheet" href="css/product.css" />
-  <link rel="stylesheet" href="css/cart.css" />
-  <link rel="stylesheet" href="css/checkout.css" />
-  <link rel="stylesheet" href="css/auth.css" />
-  <link rel="stylesheet" href="css/account.css" />
-  <link rel="stylesheet" href="css/admin.css" />
-  <link rel="stylesheet" href="css/responsive.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="css/variables.css"/>
+  <link rel="stylesheet" href="css/base.css"/>
+  <link rel="stylesheet" href="css/navbar.css"/>
+  <link rel="stylesheet" href="css/components.css"/>
+  <link rel="stylesheet" href="css/home.css"/>
+  <link rel="stylesheet" href="css/shop.css"/>
+  <link rel="stylesheet" href="css/auth.css"/>
+  <link rel="stylesheet" href="css/account.css"/>
+  <link rel="stylesheet" href="css/responsive.css"/>
+  <!-- Firebase (loads silently — Google Sign-In activates after config) -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 </head>
 <body>
 
-  <!-- ======= NAVBAR ======= -->
-  <nav id="mainNav">
-    <a href="#" class="logo" onclick="Router.go('home')">SS <span>GIFT</span></a>
-    <ul class="nav-links">
-      <li><a href="#" onclick="Router.go('home')">Home</a></li>
-      <li><a href="#" onclick="Router.go('shop')">Shop</a></li>
-      <li><a href="#" onclick="Router.go('shop', {cat:'Couple Gifts'})">Couple Gifts</a></li>
-      <li><a href="#" onclick="Router.go('shop', {cat:'Anniversary'})">Anniversary</a></li>
-      <li><a href="#" onclick="Router.go('shop', {cat:'Birthday'})">Birthday</a></li>
-    </ul>
-    <div class="nav-right">
-      <div class="nav-search-wrap">
-        <button class="nav-icon" id="searchToggle"><i class="fas fa-search"></i></button>
-        <div class="nav-search-box" id="navSearchBox">
-          <input type="text" placeholder="Search gifts..." id="globalSearch" oninput="UI.globalSearch(this.value)" />
-          <div class="search-results" id="searchResults"></div>
-        </div>
+<!-- ═══ NAVBAR ═══ -->
+<nav id="mainNav">
+  <a href="#" class="logo" onclick="Router.go('home')">SS <span>GIFT</span></a>
+  <ul class="nav-links">
+    <li><a onclick="Router.go('home')">Home</a></li>
+    <li><a onclick="Router.go('shop')">Shop</a></li>
+    <li class="nav-dropdown">
+      <a onclick="return false">Categories <i class="fas fa-chevron-down" style="font-size:.6em;margin-left:3px"></i></a>
+      <div class="nav-dropdown-menu" id="catDropdown"></div>
+    </li>
+    <li><a onclick="Router.go('shop',{cat:'Anniversary'})">Anniversary</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-search-wrap">
+      <button class="nav-icon" id="searchToggle" title="Search"><i class="fas fa-search"></i></button>
+      <div class="nav-search-box" id="navSearchBox">
+        <input type="text" placeholder="Search gifts…" id="globalSearch" oninput="UI.globalSearch(this.value)"/>
+        <div class="search-results" id="searchResults"></div>
       </div>
-      <button class="nav-icon" onclick="Router.go('wishlist')"><i class="fas fa-heart"></i><span class="badge" id="wishBadge">0</span></button>
-      <button class="nav-icon" onclick="Router.go('cart')"><i class="fas fa-shopping-bag"></i><span class="badge" id="cartBadge">0</span></button>
-      <div id="authArea"></div>
     </div>
-    <div class="hamburger" id="hamburger" onclick="UI.toggleMobile()">
-      <span></span><span></span><span></span>
+    <button class="nav-icon" id="themeToggle" onclick="Theme.toggle()" title="Toggle theme">
+      <i class="fas fa-moon" id="themeIcon"></i>
+    </button>
+    <button class="nav-icon" onclick="Router.go('wishlist')" title="Wishlist">
+      <i class="fas fa-heart"></i><span class="badge" id="wishBadge">0</span>
+    </button>
+    <button class="nav-icon" onclick="Router.go('cart')" title="Cart">
+      <i class="fas fa-shopping-bag"></i><span class="badge" id="cartBadge">0</span>
+    </button>
+    <div id="authArea"></div>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="UI.toggleMobile()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a onclick="Router.go('home');UI.toggleMobile()"><i class="fas fa-home"></i> Home</a>
+  <a onclick="Router.go('shop');UI.toggleMobile()"><i class="fas fa-store"></i> Shop</a>
+  <a onclick="Router.go('cart');UI.toggleMobile()"><i class="fas fa-shopping-bag"></i> Cart</a>
+  <a onclick="Router.go('wishlist');UI.toggleMobile()"><i class="fas fa-heart"></i> Wishlist</a>
+  <a onclick="Router.go('account');UI.toggleMobile()"><i class="fas fa-user"></i> Account</a>
+  <a onclick="Theme.toggle();UI.toggleMobile()" style="border-top:1px solid var(--color-border);margin-top:.5rem;padding-top:var(--s3)">
+    <i class="fas fa-moon" id="mobileThemeIcon"></i> Toggle Theme
+  </a>
+</div>
+
+<!-- Toast -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modalBox">
+    <div class="modal-header">
+      <h3 id="modalTitle"></h3>
+      <button class="modal-close" onclick="Modal.close()"><i class="fas fa-times"></i></button>
     </div>
-  </nav>
-
-  <!-- Mobile Menu -->
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#" onclick="Router.go('home');UI.toggleMobile()"><i class="fas fa-home"></i> Home</a>
-    <a href="#" onclick="Router.go('shop');UI.toggleMobile()"><i class="fas fa-store"></i> Shop</a>
-    <a href="#" onclick="Router.go('cart');UI.toggleMobile()"><i class="fas fa-shopping-bag"></i> Cart</a>
-    <a href="#" onclick="Router.go('wishlist');UI.toggleMobile()"><i class="fas fa-heart"></i> Wishlist</a>
-    <a href="#" onclick="Router.go('account');UI.toggleMobile()"><i class="fas fa-user"></i> Account</a>
+    <div id="modalBody"></div>
   </div>
+</div>
 
-  <!-- ======= TOAST CONTAINER ======= -->
-  <div class="toast-container" id="toastContainer"></div>
+<!-- App Root -->
+<main id="appRoot"></main>
 
-  <!-- ======= MODAL ======= -->
-  <div class="modal-overlay" id="modalOverlay">
-    <div class="modal" id="modalBox">
-      <div class="modal-header">
-        <h3 id="modalTitle"></h3>
-        <button class="modal-close" onclick="Modal.close()"><i class="fas fa-times"></i></button>
-      </div>
-      <div id="modalBody"></div>
-    </div>
-  </div>
-
-  <!-- ======= PAGE CONTAINER ======= -->
-  <main id="appRoot"></main>
-
-  <!-- ======= PAGES (Templates) ======= -->
-  <div id="page-templates" style="display:none">
-    <!-- Pages are rendered dynamically via JS -->
-  </div>
-
-  <!-- ======= SCRIPTS ======= -->
-  <!-- Data & Config -->
-  <script src="js/config.js"></script>
-  <script src="js/data.js"></script>
-  <script src="js/store.js"></script>
-  <!-- Core Modules -->
-  <script src="js/router.js"></script>
-  <script src="js/toast.js"></script>
-  <script src="js/modal.js"></script>
-  <script src="js/ui.js"></script>
-  <!-- Feature Modules -->
-  <script src="js/auth.js"></script>
-  <script src="js/cart.js"></script>
-  <script src="js/wishlist.js"></script>
-  <script src="js/checkout.js"></script>
-  <script src="js/admin.js"></script>
-  <!-- Page Renderers -->
-  <script src="js/pages/home.js"></script>
-  <script src="js/pages/shop.js"></script>
-  <script src="js/pages/product.js"></script>
-  <script src="js/pages/account.js"></script>
-  <!-- App Bootstrap -->
-  <script src="js/app.js"></script>
+<!-- Scripts — ORDER MATTERS -->
+<script src="js/config.js"></script>
+<script src="js/data.js"></script>
+<script src="js/store.js"></script>
+<script src="js/router.js"></script>
+<script src="js/toast.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/firebase.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/wishlist.js"></script>
+<script src="js/checkout.js"></script>
+<script src="js/admin.js"></script>
+<script src="js/pages/home.js"></script>
+<script src="js/pages/shop.js"></script>
+<script src="js/pages/product.js"></script>
+<script src="js/pages/account.js"></script>
+<script src="js/app.js"></script>
 
 </body>
 </html>

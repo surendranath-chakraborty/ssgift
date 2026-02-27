@@ -210,25 +210,30 @@ function orderCartWhatsApp() {
 
 // ---- INIT ----
 document.addEventListener('DOMContentLoaded', () => {
+  // 1. Apply saved theme immediately (before render)
+  Theme.init();
+
+  // 2. Init Firebase Google Auth
+  FirebaseAuth.init();
+
+  // 3. Render nav elements
   UI.renderAuthArea();
   UI.updateBadges();
+  UI.renderCatDropdown();
+
+  // 4. Init event listeners
   UI.initScrollNav();
   UI.initSearchToggle();
   UI.initFadeObserver();
 
-  // Initial route
+  // 5. Go to home
   Router.go('home');
 
-  // After route change, re-init admin if needed
-  const origGo = Router.go.bind(Router);
-  // Route to admin → init dashboard
-  const _adminInit = new MutationObserver(() => {
-    if (Router.current() === 'admin') {
-      setTimeout(() => Admin.renderDashboard(), 50);
-    }
-    if (Router.current() === 'shop') {
-      setTimeout(() => ShopPage.applyFilters(), 50);
-    }
+  // 6. Re-init page-specific logic after route changes
+  const _pageObserver = new MutationObserver(() => {
+    const r = Router.current();
+    if (r === 'admin') setTimeout(() => Admin.renderDashboard(), 50);
+    if (r === 'shop')  setTimeout(() => ShopPage.applyFilters(), 50);
   });
-  _adminInit.observe(document.getElementById('appRoot'), { childList: true });
+  _pageObserver.observe(document.getElementById('appRoot'), { childList: true });
 });

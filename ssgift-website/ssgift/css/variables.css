@@ -1,71 +1,112 @@
 /* ============================================
-   SS GIFT — Design Tokens / CSS Variables
+   SS GIFT — Design Tokens (Dual-Tone)
+   Light Mode (default) + Dark Mode
    ============================================ */
 
+/* ══ LIGHT THEME ══ */
+:root, [data-theme="light"] {
+  --color-bg:          #fdf7f0;
+  --color-bg-alt:      #f7ede2;
+  --color-surface:     #ffffff;
+  --color-surface-2:   #fffaf6;
+  --color-border:      #ead8c8;
+  --color-border-2:    #f2e6d8;
+  --color-text:        #1c0c0c;
+  --color-text-2:      #4a2e2e;
+  --color-muted:       #8c7272;
+  --color-rose:        #b5606a;
+  --color-rose-h:      #9e4e58;
+  --color-rose-soft:   #f0d6d8;
+  --color-rose-ghost:  #fdf0f1;
+  --color-gold:        #c9965a;
+  --color-gold-h:      #b8834a;
+  --color-gold-soft:   #fdf0e2;
+  --nav-bg:            rgba(253,247,240,0.95);
+  --nav-border:        rgba(234,216,200,0.8);
+  --shadow-sm:  0 1px 3px rgba(0,0,0,.06), 0 1px 6px rgba(0,0,0,.04);
+  --shadow-md:  0 4px 14px rgba(181,96,106,.10), 0 2px 8px rgba(0,0,0,.06);
+  --shadow-lg:  0 8px 28px rgba(181,96,106,.13), 0 4px 16px rgba(0,0,0,.08);
+  --shadow-xl:  0 20px 60px rgba(181,96,106,.16);
+  --card-grad:  linear-gradient(135deg,#f0d6d8,#fde8d8);
+}
+
+/* ══ DARK THEME ══ */
+[data-theme="dark"] {
+  --color-bg:          #100810;
+  --color-bg-alt:      #190f18;
+  --color-surface:     #201220;
+  --color-surface-2:   #2a1a28;
+  --color-border:      #3e2038;
+  --color-border-2:    #2e1828;
+  --color-text:        #f5eaf0;
+  --color-text-2:      #d4b0c0;
+  --color-muted:       #9a7890;
+  --color-rose:        #cc7880;
+  --color-rose-h:      #dd9098;
+  --color-rose-soft:   #3a1828;
+  --color-rose-ghost:  #280f20;
+  --color-gold:        #d4a870;
+  --color-gold-h:      #e0bb88;
+  --color-gold-soft:   #281c10;
+  --nav-bg:            rgba(16,8,16,0.97);
+  --nav-border:        rgba(62,32,56,0.9);
+  --shadow-sm:  0 1px 4px rgba(0,0,0,.4);
+  --shadow-md:  0 4px 16px rgba(0,0,0,.5);
+  --shadow-lg:  0 8px 32px rgba(0,0,0,.6);
+  --shadow-xl:  0 20px 60px rgba(0,0,0,.7);
+  --card-grad:  linear-gradient(135deg,#301820,#201018);
+}
+
+/* ══ FIXED TOKENS (no theme) ══ */
 :root {
-  /* Brand Colors */
-  --color-cream:        #fdf6ee;
-  --color-deep:         #1a0a0a;
-  --color-rose:         #b5606a;
-  --color-gold:         #c9965a;
-  --color-blush:        #f0d6d8;
-  --color-muted:        #8a7070;
-  --color-card:         #fff9f5;
-  --color-border:       #e8d5c8;
+  --color-success: #4caf7d;
+  --color-error:   #e05555;
+  --color-warning: #e07b39;
+  --color-deep:    #1c0c0c;
 
-  /* Semantic Colors */
-  --color-success:      #4caf7d;
-  --color-error:        #dc3545;
-  --color-warning:      #e07b39;
-  --color-info:         #c9965a;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
 
-  /* Typography */
-  --font-display:       'Cormorant Garamond', Georgia, serif;
-  --font-body:          'DM Sans', system-ui, sans-serif;
+  --text-xs:   .70rem;  --text-sm:  .84rem;  --text-base: .95rem;
+  --text-lg:  1.08rem;  --text-xl: 1.28rem;  --text-2xl: 1.55rem;
+  --text-3xl:  2rem;    --text-4xl: 2.8rem;
 
-  --text-xs:    0.68rem;
-  --text-sm:    0.82rem;
-  --text-base:  0.95rem;
-  --text-lg:    1.1rem;
-  --text-xl:    1.3rem;
-  --text-2xl:   1.6rem;
-  --text-3xl:   2rem;
-  --text-4xl:   2.8rem;
+  --s1:.25rem; --s2:.5rem;  --s3:.75rem; --s4:1rem;
+  --s5:1.25rem;--s6:1.5rem; --s8:2rem;   --s10:2.5rem;
+  --s12:3rem;  --s16:4rem;  --s20:5rem;
 
-  /* Spacing */
-  --space-1:  0.25rem;
-  --space-2:  0.5rem;
-  --space-3:  0.75rem;
-  --space-4:  1rem;
-  --space-5:  1.25rem;
-  --space-6:  1.5rem;
-  --space-8:  2rem;
-  --space-10: 2.5rem;
-  --space-12: 3rem;
-  --space-16: 4rem;
-  --space-20: 5rem;
+  --r-xs:4px; --r-sm:7px; --r-md:12px; --r-lg:18px;
+  --r-xl:24px;--r-2xl:32px;--r-full:9999px;
 
-  /* Border Radius */
-  --radius-sm:   6px;
-  --radius-md:   10px;
-  --radius-lg:   16px;
-  --radius-xl:   20px;
-  --radius-full: 9999px;
+  /* keep old space names working too */
+  --space-1:var(--s1);--space-2:var(--s2);--space-3:var(--s3);
+  --space-4:var(--s4);--space-5:var(--s5);--space-6:var(--s6);
+  --space-8:var(--s8);--space-10:var(--s10);--space-12:var(--s12);
+  --space-16:var(--s16);--space-20:var(--s20);
+  /* keep old radius names */
+  --radius-sm:var(--r-sm);--radius-md:var(--r-md);--radius-lg:var(--r-lg);
+  --radius-xl:var(--r-xl);--radius-full:var(--r-full);
 
-  /* Shadows */
-  --shadow-sm:  0 2px 8px rgba(181,96,106,0.08);
-  --shadow-md:  0 8px 24px rgba(181,96,106,0.14);
-  --shadow-lg:  0 16px 48px rgba(181,96,106,0.18);
-  --shadow-xl:  0 30px 80px rgba(181,96,106,0.22);
+  --ease: cubic-bezier(.4,0,.2,1);
+  --trans-fast: all .15s var(--ease);
+  --trans:      all .25s var(--ease);
+  --trans-slow: all .4s  var(--ease);
+  /* keep old names */
+  --transition-fast:var(--trans-fast);
+  --transition-base:var(--trans);
+  --transition-slow:var(--trans-slow);
 
-  /* Transitions */
-  --transition-fast:   all 0.15s ease;
-  --transition-base:   all 0.25s ease;
-  --transition-slow:   all 0.4s ease;
-
-  /* Layout */
   --nav-height:    68px;
-  --sidebar-width: 240px;
-  --max-width:     1280px;
-  --page-padding:  0 5vw;
+  --sidebar-width: 250px;
+}
+
+/* Smooth theme switch — only on structural bg/border/color */
+body, nav, footer, .auth-box, .account-sidebar,
+.account-content, .admin-sidebar, .admin-main,
+.product-card, .stat-card, .order-card, .admin-table,
+.modal, .toast, .form-input, .qty-control {
+  transition: background-color .3s var(--ease),
+              border-color .3s var(--ease),
+              color .2s var(--ease);
 }

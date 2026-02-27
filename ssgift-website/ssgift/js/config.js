@@ -11,6 +11,17 @@ const CONFIG = Object.freeze({
   FREE_DELIVERY_ABOVE: 499,
   DELIVERY_CHARGE:     49,
   PRODUCTS_PER_PAGE:   12,
+
+  // ── Firebase config ──────────────────────────────────────────
+  FIREBASE: {
+    apiKey:            "AIzaSyDJTuOtTi4qvT-OhRaI-i_is0fCRhJU82s",
+    authDomain:        "ss-gift-23a3e.firebaseapp.com",
+    projectId:         "ss-gift-23a3e",
+    storageBucket:     "ss-gift-23a3e.firebasestorage.app",
+    messagingSenderId: "172361433021",
+    appId:             "1:172361433021:web:0e41b0a20a62872cc5dcd4",
+  },
+
   STORAGE_KEYS: {
     PRODUCTS:  'ssgift_products',
     CART:      'ssgift_cart',
@@ -20,5 +31,6 @@ const CONFIG = Object.freeze({
     COUPONS:   'ssgift_coupons',
     CURRENT:   'ssgift_current',
     SUBS:      'ssgift_subs',
+    THEME:     'ssgift_theme',
   }
 });
