@@ -1,6 +1,6 @@
 /**
  * SS GIFT — Firebase / Google Auth Wrapper
- * Uses Firebase Compat SDK (loaded via CDN in index.html)
+ * Uses redirect instead of popup to avoid COOP browser errors
  */
 
 const FirebaseAuth = (() => {
@@ -10,7 +10,6 @@ const FirebaseAuth = (() => {
 
   const init = () => {
     try {
-      // Check if Firebase SDK loaded and config is real
       if (
         typeof firebase === 'undefined' ||
         CONFIG.FIREBASE.apiKey === 'YOUR_API_KEY'
@@ -19,7 +18,6 @@ const FirebaseAuth = (() => {
         return;
       }
 
-      // Initialize Firebase app (avoid duplicate init)
       if (!firebase.apps.length) {
         firebase.initializeApp(CONFIG.FIREBASE);
       }
@@ -32,11 +30,23 @@ const FirebaseAuth = (() => {
 
       console.info('[SS GIFT] Firebase initialized ✓');
 
+      // Handle redirect result when user comes back after Google login
+      _auth.getRedirectResult().then((result) => {
+        if (result && result.user) {
+          _syncFirebaseUser(result.user);
+          Toast.show(`Welcome, ${result.user.displayName?.split(' ')[0]}! 🎉`, 'success');
+          Router.go('account');
+        }
+      }).catch((err) => {
+        if (err.code && err.code !== 'auth/no-current-user') {
+          console.warn('[SS GIFT] Redirect result error:', err.message);
+        }
+      });
+
       // Listen for auth state changes (handles page reload persistence)
       _auth.onAuthStateChanged((firebaseUser) => {
         if (firebaseUser) {
           const current = Store.getCurrentUser();
-          // Only auto-apply if no session exists yet (avoid overwriting admin)
           if (!current) {
             _syncFirebaseUser(firebaseUser);
           }
@@ -59,14 +69,13 @@ const FirebaseAuth = (() => {
     let user  = users.find(u => u.id === uid || u.email === email);
 
     if (!user) {
-      // First time Google sign-in — create account
       user = {
         id:        uid,
         name,
         email,
         photo,
         phone:     '',
-        password:  null,        // Google users have no password
+        password:  null,
         provider:  'google',
         blocked:   false,
         createdAt: new Date().toLocaleDateString('en-IN'),
@@ -74,7 +83,6 @@ const FirebaseAuth = (() => {
       users.push(user);
       Store.setUsers(users);
     } else {
-      // Update name/photo in case they changed on Google
       user.photo = photo;
       user.name  = name;
       Store.setUsers(users);
@@ -84,7 +92,7 @@ const FirebaseAuth = (() => {
     UI.renderAuthArea();
   };
 
-  // Sign in with Google popup
+  // Sign in with Google — uses REDIRECT (no popup, avoids COOP errors)
   const signInWithGoogle = async () => {
     if (!_ready) {
       Toast.show('Google Sign-In not configured yet. Please use email login.', 'warning', 4000);
@@ -92,13 +100,8 @@ const FirebaseAuth = (() => {
     }
 
     try {
-      const result = await _auth.signInWithPopup(_provider);
-      _syncFirebaseUser(result.user);
-      Toast.show(`Welcome, ${result.user.displayName?.split(' ')[0]}! 🎉`, 'success');
-      Router.go('account');
+      await _auth.signInWithRedirect(_provider);
     } catch (err) {
-      if (err.code === 'auth/popup-closed-by-user') return; // silent
-      if (err.code === 'auth/cancelled-popup-request') return;
       Toast.show('Google sign-in failed. Try again.', 'error');
       console.warn('[SS GIFT] Google sign-in error:', err.message);
     }
