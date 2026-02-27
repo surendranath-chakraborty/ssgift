@@ -12,7 +12,7 @@ const CONFIG = Object.freeze({
   DELIVERY_CHARGE:     49,
   PRODUCTS_PER_PAGE:   12,
 
-  // ── Firebase config ──────────────────────────────────────────
+  // ── Firebase Config ───────────────────────────────────────────
   FIREBASE: {
     apiKey:            "AIzaSyDJTuOtTi4qvT-OhRaI-i_is0fCRhJU82s",
     authDomain:        "ss-gift-23a3e.firebaseapp.com",

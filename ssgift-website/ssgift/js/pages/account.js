@@ -259,97 +259,115 @@ const AccountPage = (() => {
 
 
 /* ════════════════════════════════════════════
-   ADMIN PAGE
+   ADMIN PAGE — Responsive + Mobile Tab Nav
    ════════════════════════════════════════════ */
 const AdminPage = (() => {
   const render = () => `
     <div class="admin-wrap">
+
+      <!-- Desktop Sidebar -->
       <aside class="admin-sidebar">
         <div class="admin-sidebar__brand">
           <span style="font-size:1.1rem">⚙️</span> Admin Panel
         </div>
         <ul class="admin-menu">
-          <li><a class="active" data-sec="dashboard" onclick="Admin.switchSection('dashboard')">
-            <i class="fas fa-chart-bar"></i> Dashboard
-          </a></li>
-          <li><a data-sec="products" onclick="Admin.switchSection('products')">
-            <i class="fas fa-gift"></i> Products
-          </a></li>
-          <li><a data-sec="orders" onclick="Admin.switchSection('orders')">
-            <i class="fas fa-box"></i> Orders
-          </a></li>
-          <li><a data-sec="users" onclick="Admin.switchSection('users')">
-            <i class="fas fa-users"></i> Users
-          </a></li>
-          <li><a data-sec="coupons" onclick="Admin.switchSection('coupons')">
-            <i class="fas fa-tag"></i> Coupons
-          </a></li>
+          <li><a class="active" data-sec="dashboard" onclick="Admin.switchSection('dashboard')"><i class="fas fa-chart-bar"></i> Dashboard</a></li>
+          <li><a data-sec="products"  onclick="Admin.switchSection('products')"><i class="fas fa-gift"></i> Products</a></li>
+          <li><a data-sec="orders"    onclick="Admin.switchSection('orders')"><i class="fas fa-box"></i> Orders</a></li>
+          <li><a data-sec="users"     onclick="Admin.switchSection('users')"><i class="fas fa-users"></i> Users</a></li>
+          <li><a data-sec="coupons"   onclick="Admin.switchSection('coupons')"><i class="fas fa-tag"></i> Coupons</a></li>
         </ul>
         <ul class="admin-menu" style="margin-top:auto;border-top:1px solid var(--color-border);padding-top:var(--s4)">
-          <li><a onclick="Router.go('home')">
-            <i class="fas fa-external-link-alt"></i> View Shop
-          </a></li>
-          <li><a class="danger" onclick="Auth.logout()">
-            <i class="fas fa-sign-out-alt"></i> Sign Out
-          </a></li>
+          <li><a onclick="Router.go('home')"><i class="fas fa-external-link-alt"></i> View Shop</a></li>
+          <li><a class="danger" onclick="Auth.logout()"><i class="fas fa-sign-out-alt"></i> Sign Out</a></li>
         </ul>
       </aside>
 
+      <!-- Main -->
       <div class="admin-main">
+
         <div class="admin-section active" id="adm-dashboard">
           <h2>Dashboard</h2>
           <div class="stats-grid" id="adminStats"></div>
           <h3 style="font-family:var(--font-display);font-size:1.3rem;margin-bottom:var(--s4);color:var(--color-text)">Recent Orders</h3>
-          <table class="admin-table">
-            <thead><tr><th>Order ID</th><th>Customer</th><th>Total</th><th>Status</th><th>Date</th></tr></thead>
-            <tbody id="recentOrdersBody"></tbody>
-          </table>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead><tr><th>Order ID</th><th>Customer</th><th>Total</th><th>Status</th><th>Date</th></tr></thead>
+              <tbody id="recentOrdersBody"></tbody>
+            </table>
+          </div>
         </div>
 
         <div class="admin-section" id="adm-products">
           <h2>Products</h2>
           <div class="admin-toolbar">
-            <button class="btn btn--primary btn--md" onclick="Admin.openProductModal()">
-              <i class="fas fa-plus"></i> Add Product
-            </button>
-            <input class="admin-search" type="text" id="admProdSearch"
-              placeholder="Search products…" oninput="Admin.renderProducts()"/>
+            <button class="btn btn--primary btn--md" onclick="Admin.openProductModal()"><i class="fas fa-plus"></i> Add Product</button>
+            <input class="admin-search" type="text" id="admProdSearch" placeholder="Search products…" oninput="Admin.renderProducts()"/>
           </div>
-          <table class="admin-table">
-            <thead><tr><th>Icon</th><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Actions</th></tr></thead>
-            <tbody id="adminProductsBody"></tbody>
-          </table>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead><tr><th>Image</th><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Actions</th></tr></thead>
+              <tbody id="adminProductsBody"></tbody>
+            </table>
+          </div>
         </div>
 
         <div class="admin-section" id="adm-orders">
           <h2>Orders</h2>
-          <table class="admin-table">
-            <thead><tr><th>Order ID</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Notify</th></tr></thead>
-            <tbody id="adminOrdersBody"></tbody>
-          </table>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead><tr><th>Order ID</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Notify</th></tr></thead>
+              <tbody id="adminOrdersBody"></tbody>
+            </table>
+          </div>
         </div>
 
         <div class="admin-section" id="adm-users">
           <h2>Users</h2>
-          <table class="admin-table">
-            <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Orders</th><th>Status</th><th>Actions</th></tr></thead>
-            <tbody id="adminUsersBody"></tbody>
-          </table>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Orders</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="adminUsersBody"></tbody>
+            </table>
+          </div>
         </div>
 
         <div class="admin-section" id="adm-coupons">
           <h2>Coupons</h2>
           <div class="admin-toolbar">
-            <button class="btn btn--primary btn--md" onclick="Admin.openCouponModal()">
-              <i class="fas fa-plus"></i> Add Coupon
-            </button>
+            <button class="btn btn--primary btn--md" onclick="Admin.openCouponModal()"><i class="fas fa-plus"></i> Add Coupon</button>
           </div>
-          <table class="admin-table">
-            <thead><tr><th>Code</th><th>Value</th><th>Type</th><th>Status</th><th>Actions</th></tr></thead>
-            <tbody id="adminCouponsBody"></tbody>
-          </table>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead><tr><th>Code</th><th>Value</th><th>Type</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="adminCouponsBody"></tbody>
+            </table>
+          </div>
         </div>
-      </div>
+
+      </div><!-- /admin-main -->
+
+      <!-- Mobile Bottom Tab Nav -->
+      <nav class="admin-tab-nav">
+        <div class="admin-tab-nav__items">
+          <button class="admin-tab-nav__item active" data-sec="dashboard" onclick="Admin.switchSection('dashboard')">
+            <i class="fas fa-chart-bar"></i> Stats
+          </button>
+          <button class="admin-tab-nav__item" data-sec="products" onclick="Admin.switchSection('products')">
+            <i class="fas fa-gift"></i> Products
+          </button>
+          <button class="admin-tab-nav__item" data-sec="orders" onclick="Admin.switchSection('orders')">
+            <i class="fas fa-box"></i> Orders
+          </button>
+          <button class="admin-tab-nav__item" data-sec="users" onclick="Admin.switchSection('users')">
+            <i class="fas fa-users"></i> Users
+          </button>
+          <button class="admin-tab-nav__item" data-sec="coupons" onclick="Admin.switchSection('coupons')">
+            <i class="fas fa-tag"></i> Coupons
+          </button>
+        </div>
+      </nav>
+
     </div>`;
 
   return { render };

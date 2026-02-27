@@ -17,7 +17,9 @@ const UI = (() => {
           <button class="product-card__wishlist ${inWish ? 'active' : ''}"
             onclick="event.stopPropagation();Cart.toggleWishlist(${p.id},this)"
             title="${inWish?'Remove from wishlist':'Add to wishlist'}">${inWish ? '❤️' : '🤍'}</button>
-          <span style="font-size:4rem">${p.emoji}</span>
+          ${p.image
+            ? `<img src="${p.image}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0"/>`
+            : `<span style="font-size:4rem">${p.emoji}</span>`}
         </div>
         <div class="product-card__body">
           <div class="product-card__cat">${p.cat}</div>
