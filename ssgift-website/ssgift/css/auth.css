@@ -1,0 +1,58 @@
+/* ============================================
+   SS GIFT — Auth Page
+   ============================================ */
+.auth-wrap {
+  min-height: calc(100vh - var(--nav-height));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8);
+  background: radial-gradient(ellipse at top right, rgba(240,214,216,0.5), transparent 60%),
+              radial-gradient(ellipse at bottom left, rgba(201,150,90,0.15), transparent 60%);
+}
+.auth-box {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-10);
+  width: 100%;
+  max-width: 430px;
+  box-shadow: var(--shadow-lg);
+}
+.auth-logo { text-align: center; margin-bottom: var(--space-8); }
+.auth-logo p { font-size: var(--text-sm); color: var(--color-muted); margin-top: var(--space-2); }
+
+.auth-tabs {
+  display: flex;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: var(--space-8);
+}
+.auth-tab {
+  flex: 1;
+  padding: 0.65rem;
+  border: none;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  transition: var(--transition-fast);
+  color: var(--color-muted);
+}
+.auth-tab.active { background: var(--color-rose); color: #fff; }
+
+.auth-form { display: none; flex-direction: column; gap: var(--space-4); }
+.auth-form.active { display: flex; }
+
+.admin-hint {
+  background: var(--color-blush);
+  border: 1px solid var(--color-rose);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-xs);
+  color: var(--color-rose);
+  text-align: center;
+  margin-top: var(--space-2);
+  line-height: 1.6;
+}

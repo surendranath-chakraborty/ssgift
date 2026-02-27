@@ -1,0 +1,71 @@
+/* ============================================
+   SS GIFT — Design Tokens / CSS Variables
+   ============================================ */
+
+:root {
+  /* Brand Colors */
+  --color-cream:        #fdf6ee;
+  --color-deep:         #1a0a0a;
+  --color-rose:         #b5606a;
+  --color-gold:         #c9965a;
+  --color-blush:        #f0d6d8;
+  --color-muted:        #8a7070;
+  --color-card:         #fff9f5;
+  --color-border:       #e8d5c8;
+
+  /* Semantic Colors */
+  --color-success:      #4caf7d;
+  --color-error:        #dc3545;
+  --color-warning:      #e07b39;
+  --color-info:         #c9965a;
+
+  /* Typography */
+  --font-display:       'Cormorant Garamond', Georgia, serif;
+  --font-body:          'DM Sans', system-ui, sans-serif;
+
+  --text-xs:    0.68rem;
+  --text-sm:    0.82rem;
+  --text-base:  0.95rem;
+  --text-lg:    1.1rem;
+  --text-xl:    1.3rem;
+  --text-2xl:   1.6rem;
+  --text-3xl:   2rem;
+  --text-4xl:   2.8rem;
+
+  /* Spacing */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+
+  /* Border Radius */
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   16px;
+  --radius-xl:   20px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm:  0 2px 8px rgba(181,96,106,0.08);
+  --shadow-md:  0 8px 24px rgba(181,96,106,0.14);
+  --shadow-lg:  0 16px 48px rgba(181,96,106,0.18);
+  --shadow-xl:  0 30px 80px rgba(181,96,106,0.22);
+
+  /* Transitions */
+  --transition-fast:   all 0.15s ease;
+  --transition-base:   all 0.25s ease;
+  --transition-slow:   all 0.4s ease;
+
+  /* Layout */
+  --nav-height:    68px;
+  --sidebar-width: 240px;
+  --max-width:     1280px;
+  --page-padding:  0 5vw;
+}

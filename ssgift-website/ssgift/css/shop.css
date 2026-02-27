@@ -1,0 +1,416 @@
+/* ============================================
+   SS GIFT — Shop Page
+   ============================================ */
+.shop-layout {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  gap: var(--space-8);
+  padding: var(--space-8) 5vw;
+}
+.shop-sidebar { position: sticky; top: calc(var(--nav-height) + 12px); height: fit-content; }
+.filter-card {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  margin-bottom: var(--space-4);
+}
+.filter-card__title {
+  font-weight: 600;
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-4);
+  display: flex; justify-content: space-between; align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+.filter-card__options label {
+  display: flex; align-items: center; gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  margin-bottom: var(--space-2);
+  cursor: pointer;
+  transition: color 0.15s;
+}
+.filter-card__options label:hover { color: var(--color-deep); }
+.filter-card__options input[type="checkbox"] { accent-color: var(--color-rose); width: 14px; height: 14px; }
+
+.price-range {
+  width: 100%;
+  accent-color: var(--color-rose);
+  margin-top: var(--space-2);
+}
+.price-range-labels {
+  display: flex; justify-content: space-between;
+  font-size: var(--text-xs); color: var(--color-muted);
+  margin-bottom: var(--space-2);
+}
+
+.shop-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap; gap: var(--space-4);
+}
+.shop-header__title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 600;
+}
+.shop-header__count { font-size: var(--text-sm); color: var(--color-muted); margin-top: var(--space-1); }
+
+.shop-controls { display: flex; gap: var(--space-3); align-items: center; }
+
+.search-bar {
+  display: flex; align-items: center; gap: var(--space-2);
+  background: var(--color-card);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-full);
+  padding: 0.5rem 1rem;
+  transition: border-color 0.2s;
+}
+.search-bar:focus-within { border-color: var(--color-rose); }
+.search-bar i { color: var(--color-muted); font-size: var(--text-sm); }
+.search-bar input {
+  border: none; background: transparent;
+  font-size: var(--text-sm); outline: none;
+  width: 170px; color: var(--color-deep);
+}
+
+.sort-select {
+  border: 1.5px solid var(--color-border);
+  background: var(--color-card);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  outline: none;
+  color: var(--color-deep);
+  cursor: pointer;
+}
+
+.filter-chips { display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-4); }
+.chip {
+  background: var(--color-blush);
+  color: var(--color-rose);
+  font-size: var(--text-xs);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  display: flex; align-items: center; gap: var(--space-1);
+  cursor: pointer; font-weight: 500;
+  transition: var(--transition-fast);
+}
+.chip:hover { background: var(--color-rose); color: #fff; }
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+.products-grid--4 { grid-template-columns: repeat(4, 1fr); }
+
+.pagination { display: flex; justify-content: center; gap: var(--space-2); margin-top: var(--space-8); }
+.page-btn {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-border);
+  background: transparent;
+  color: var(--color-deep);
+  font-size: var(--text-sm);
+  transition: var(--transition-fast);
+  font-family: var(--font-body);
+}
+.page-btn:hover, .page-btn.active {
+  background: var(--color-rose);
+  border-color: var(--color-rose);
+  color: #fff;
+}
+
+/* ============================================
+   SS GIFT — Product Detail
+   ============================================ */
+.product-detail { padding: var(--space-6) 5vw; max-width: 1100px; margin: 0 auto; }
+.product-detail__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+  align-items: start;
+}
+.product-detail__img {
+  background: linear-gradient(135deg, var(--color-blush), #fde8d8);
+  border-radius: var(--radius-xl);
+  height: 440px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9rem;
+  position: sticky;
+  top: calc(var(--nav-height) + 12px);
+}
+.product-detail__cat {
+  font-size: var(--text-xs);
+  color: var(--color-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+.product-detail__name {
+  font-family: var(--font-display);
+  font-size: 2.3rem;
+  font-weight: 400;
+  line-height: 1.15;
+  margin: var(--space-2) 0;
+}
+.product-detail__rating {
+  display: flex; align-items: center; gap: var(--space-2);
+  font-size: var(--text-sm); color: var(--color-muted);
+  margin-bottom: var(--space-4);
+}
+.product-detail__price-row {
+  display: flex; align-items: center; gap: var(--space-4);
+  margin: var(--space-4) 0;
+}
+.product-detail__price { font-size: 2rem; font-weight: 700; color: var(--color-rose); }
+.product-detail__original {
+  font-size: 1.05rem;
+  color: var(--color-muted);
+  text-decoration: line-through;
+}
+.product-detail__disc {
+  background: var(--color-rose);
+  color: #fff;
+  font-size: var(--text-xs);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+}
+.product-detail__desc {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  line-height: 1.8;
+  margin-bottom: var(--space-6);
+}
+.qty-row { display: flex; align-items: center; gap: var(--space-6); margin: var(--space-6) 0; }
+.qty-row label { font-size: var(--text-sm); font-weight: 600; }
+.detail-btns { display: flex; gap: var(--space-3); flex-wrap: wrap; margin: var(--space-6) 0; }
+
+.delivery-info {
+  background: var(--color-blush);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+.delivery-info strong { color: var(--color-deep); }
+
+/* Product Tabs */
+.product-tabs { margin-top: var(--space-8); }
+.tab-nav {
+  display: flex;
+  border-bottom: 2px solid var(--color-border);
+  margin-bottom: var(--space-4);
+}
+.tab-nav-btn {
+  background: none; border: none;
+  padding: 0.65rem 1.2rem;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-muted);
+  border-bottom: 2.5px solid transparent;
+  margin-bottom: -2px;
+  transition: var(--transition-fast);
+}
+.tab-nav-btn:hover { color: var(--color-deep); }
+.tab-nav-btn.active { color: var(--color-rose); border-bottom-color: var(--color-rose); }
+.tab-pane { display: none; font-size: var(--text-sm); color: var(--color-muted); line-height: 1.8; }
+.tab-pane.active { display: block; }
+
+/* ============================================
+   SS GIFT — Cart
+   ============================================ */
+.cart-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: var(--space-8);
+  padding: var(--space-6) 5vw;
+}
+.cart-items { display: flex; flex-direction: column; gap: var(--space-4); }
+.cart-item {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  display: flex; gap: var(--space-5); align-items: center;
+  transition: var(--transition-fast);
+}
+.cart-item:hover { box-shadow: var(--shadow-sm); }
+.cart-item__img {
+  width: 84px; height: 84px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--color-blush), #fde8d8);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.3rem; flex-shrink: 0;
+}
+.cart-item__info { flex: 1; }
+.cart-item__name { font-weight: 600; font-size: var(--text-base); }
+.cart-item__cat  { font-size: var(--text-xs); color: var(--color-muted); margin-top: var(--space-1); }
+.cart-item__price { font-weight: 700; color: var(--color-rose); margin-top: var(--space-2); }
+.cart-item__actions {
+  display: flex; flex-direction: column;
+  align-items: flex-end; gap: var(--space-3);
+}
+.cart-item__remove {
+  background: none; border: none;
+  color: var(--color-muted); font-size: 0.9rem;
+  transition: color 0.2s;
+  padding: var(--space-1);
+}
+.cart-item__remove:hover { color: var(--color-error); }
+
+.order-summary {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  position: sticky;
+  top: calc(var(--nav-height) + 12px);
+  height: fit-content;
+}
+.order-summary h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  margin-bottom: var(--space-6);
+}
+.summary-row {
+  display: flex; justify-content: space-between;
+  font-size: var(--text-sm); color: var(--color-muted);
+  margin-bottom: var(--space-3);
+}
+.summary-row--total {
+  font-weight: 700; font-size: var(--text-lg);
+  color: var(--color-deep);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-3);
+  margin-top: var(--space-2);
+}
+.summary-row--delivery { color: var(--color-success); }
+
+.coupon-row { display: flex; gap: var(--space-2); margin: var(--space-4) 0; }
+.coupon-input {
+  flex: 1;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.6rem 0.9rem;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.coupon-input:focus { border-color: var(--color-rose); }
+.coupon-hint { font-size: var(--text-xs); color: var(--color-muted); margin-bottom: var(--space-4); }
+.coupon-msg  { font-size: var(--text-xs); margin-bottom: var(--space-2); }
+
+/* ============================================
+   SS GIFT — Checkout
+   ============================================ */
+.checkout-wrap { padding: var(--space-8) 5vw; max-width: 860px; margin: 0 auto; }
+.checkout-title {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: var(--space-8);
+}
+
+/* Step Indicator */
+.steps { display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-12); }
+.step-item { display: flex; align-items: center; gap: var(--space-2); }
+.step-circle {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--text-sm); font-weight: 700;
+  background: var(--color-cream);
+  color: var(--color-muted);
+  transition: var(--transition-base);
+}
+.step-circle.active { background: var(--color-rose); border-color: var(--color-rose); color: #fff; }
+.step-circle.done   { background: var(--color-success); border-color: var(--color-success); color: #fff; }
+.step-label { font-size: var(--text-sm); font-weight: 500; color: var(--color-muted); }
+.step-label.active { color: var(--color-rose); }
+.step-line { width: 70px; height: 2px; background: var(--color-border); margin: 0 var(--space-2); transition: var(--transition-base); }
+.step-line.done { background: var(--color-success); }
+
+.checkout-step { display: none; }
+.checkout-step.active { display: block; }
+.checkout-step h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  margin-bottom: var(--space-5);
+}
+.checkout-footer {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: var(--space-8);
+}
+
+/* Payment Options */
+.payment-options {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4); margin-bottom: var(--space-6);
+}
+.pay-option {
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5) var(--space-4);
+  text-align: center; cursor: pointer;
+  transition: var(--transition-fast);
+}
+.pay-option:hover, .pay-option.selected {
+  border-color: var(--color-rose);
+  background: var(--color-blush);
+}
+.pay-option__icon  { font-size: 1.8rem; margin-bottom: var(--space-2); }
+.pay-option__label { font-size: var(--text-xs); font-weight: 600; }
+
+.upi-qr {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  text-align: center;
+}
+.qr-box {
+  width: 140px; height: 140px;
+  background: repeating-conic-gradient(#000 0deg 90deg, #fff 90deg 180deg) 0 0/18px 18px;
+  margin: var(--space-4) auto;
+  border: 3px solid var(--color-deep);
+  border-radius: 4px;
+}
+
+.co-summary {
+  background: var(--color-blush);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  margin-top: var(--space-4);
+}
+
+/* Order Success */
+.order-success { text-align: center; padding: var(--space-12) var(--space-4); }
+.order-success__icon { font-size: 4rem; margin-bottom: var(--space-4); animation: bounceIn 0.6s ease; }
+@keyframes bounceIn {
+  0%   { transform: scale(0); }
+  60%  { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+.order-success h2 {
+  font-family: var(--font-display);
+  font-size: 2.2rem; margin-bottom: var(--space-3);
+}
+.order-id-badge {
+  display: inline-block;
+  background: var(--color-blush);
+  color: var(--color-rose);
+  padding: 0.5rem 1.5rem;
+  border-radius: var(--radius-full);
+  font-weight: 700; font-size: var(--text-base);
+  margin: var(--space-4) 0;
+}

@@ -1,0 +1,163 @@
+/* ============================================
+   SS GIFT — Base & Reset Styles
+   ============================================ */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-cream);
+  color: var(--color-deep);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--color-cream); }
+::-webkit-scrollbar-thumb { background: var(--color-rose); border-radius: var(--radius-full); }
+
+/* Links */
+a { text-decoration: none; color: inherit; }
+
+/* Images */
+img { max-width: 100%; display: block; }
+
+/* Buttons base */
+button { cursor: pointer; font-family: var(--font-body); }
+
+/* Inputs base */
+input, select, textarea {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+}
+
+/* Page container */
+#appRoot {
+  padding-top: var(--nav-height);
+  min-height: 100vh;
+}
+
+/* Page sections */
+.page { display: none; min-height: calc(100vh - var(--nav-height)); }
+.page.active { display: block; }
+
+/* Section layout */
+.section {
+  padding: var(--space-20) 5vw;
+}
+.section--alt {
+  background: var(--color-blush);
+}
+
+.section-head {
+  text-align: center;
+  margin-bottom: var(--space-12);
+}
+.section-tag {
+  font-size: var(--text-xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+  display: block;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 300;
+  line-height: 1.15;
+}
+.section-title em {
+  font-style: italic;
+  color: var(--color-rose);
+}
+
+/* Utility classes */
+.text-center { text-align: center; }
+.text-rose    { color: var(--color-rose); }
+.text-gold    { color: var(--color-gold); }
+.text-muted   { color: var(--color-muted); }
+
+.mt-1 { margin-top: var(--space-2); }
+.mt-2 { margin-top: var(--space-4); }
+.mt-3 { margin-top: var(--space-6); }
+.mt-4 { margin-top: var(--space-8); }
+
+.flex         { display: flex; }
+.flex-center  { display: flex; align-items: center; justify-content: center; }
+.flex-between { display: flex; align-items: center; justify-content: space-between; }
+.gap-1  { gap: var(--space-2); }
+.gap-2  { gap: var(--space-4); }
+.gap-3  { gap: var(--space-6); }
+
+/* Page header utility */
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-6) 5vw var(--space-2);
+}
+.back-btn {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  transition: var(--transition-fast);
+}
+.back-btn:hover { color: var(--color-rose); }
+
+.breadcrumb {
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+}
+.breadcrumb span { color: var(--color-rose); }
+
+/* Grid layouts */
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-6); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-6); }
+
+/* Stars */
+.stars { color: #f5a623; font-size: var(--text-sm); }
+
+/* Status badges */
+.badge-status {
+  font-size: var(--text-xs);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  display: inline-block;
+}
+.badge-processing { background: #fff3cd; color: #856404; }
+.badge-shipped    { background: #cfe2ff; color: #084298; }
+.badge-delivered  { background: #d1e7dd; color: #0a3622; }
+.badge-cancelled  { background: #f8d7da; color: #842029; }
+.badge-active     { background: #d1e7dd; color: #0a3622; }
+.badge-blocked    { background: #f8d7da; color: #842029; }
+
+/* Scroll fade-in animation */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
